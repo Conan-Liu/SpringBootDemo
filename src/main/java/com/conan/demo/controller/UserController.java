@@ -19,6 +19,11 @@ public class UserController {
         this.userService = userService;
     }
 
+    @RequestMapping("/userInfo")
+    public String userInfo() {
+        return "UserInfo";
+    }
+
     public Object add(@RequestBody User user) {
         if (userService.findByName(user.getName()) != null) {
             JSONObject json = new JSONObject();
