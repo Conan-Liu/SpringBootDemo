@@ -26,6 +26,8 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+
+        <!-- 这个刚开始运行，会报错，因为加载不到数据源 DataSource -->
         <!--
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
