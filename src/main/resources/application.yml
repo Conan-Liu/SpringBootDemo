@@ -1,0 +1,3 @@
+mybatis:
+    type-aliases-package: com.conan.demo.model
+    config-location: classpath:mybatis.xml

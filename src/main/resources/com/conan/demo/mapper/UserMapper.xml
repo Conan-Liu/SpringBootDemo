@@ -3,7 +3,7 @@
 <mapper namespace="com.conan.demo.mapper.UserMapper">
 
     <insert id="add" useGeneratedKeys="true" keyProperty="id">
-        insert into user(id, name, flag) values (#{name},#{password})
+        insert into user(id, name, flag) values (#{id}, #{name}, #{flag})
     </insert>
 
     <select id="findOne" resultType="User">
