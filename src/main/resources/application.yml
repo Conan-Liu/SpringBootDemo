@@ -1,3 +1,18 @@
+spring:
+  profiles:
+    active: dev
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://10.0.19.6:30242/dataworks?useUnicode=true&characterEncoding=utf-8
+    username: pd_test_dev
+    password: VFR5rgdf
+
+server:
+  port: 7777
+
+#初始化加载DispatcherServlet
+spring.mvc.servlet.load-on-startup: 1
+
 mybatis:
     type-aliases-package: com.conan.demo.model
-    config-location: classpath:mybatis.xml
+    mapper-locations: classpath:mapper/*.xml

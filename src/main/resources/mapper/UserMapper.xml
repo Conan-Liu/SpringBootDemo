@@ -3,18 +3,15 @@
 <mapper namespace="com.conan.demo.mapper.UserMapper">
 
     <insert id="add" useGeneratedKeys="true" keyProperty="id">
-        insert into user(id, name, flag) values (#{id}, #{name}, #{flag})
+        insert into aaa(id, name, flag) values (#{id}, #{name}, #{flag})
     </insert>
 
-    <select id="findOne" resultType="User">
-        select * from user
+    <select id="findOne" parameterType="java.lang.Integer" resultType="com.conan.demo.model.User">
+        select * from aaa
         <where>
             <!-- 重复说一下，id 不能是 int，int 默认是 0，不可能是 null, 而 Integer 可以是 null-->
             <if test="id!=null">
                 id=#{id}
-            </if>
-            <if test="name!=null">
-                and name=#{name}
             </if>
         </where>
     </select>
