@@ -16,4 +16,8 @@
         </where>
     </select>
 
+    <select id="getAllUser" resultType="com.conan.demo.model.User">
+        select * from aaa
+    </select>
+
 </mapper>

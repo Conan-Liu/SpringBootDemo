@@ -1,9 +1,12 @@
 package com.conan.demo.model;
 
+import java.io.Serializable;
+
 /**
  * Created by Administrator on 2019/1/2.
  */
-public class User {
+public class User implements Serializable {
+
     private Integer id;
     private String name;
     private String flag;
