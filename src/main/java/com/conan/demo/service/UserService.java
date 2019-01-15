@@ -16,12 +16,15 @@ public class UserService {
     @Autowired
     private UserMapper userMapper;
 
-    public User getUser(Integer id) {
-        return userMapper.findOne(id);
+    public int addUser(User user) {
+        return userMapper.insert(user);
     }
 
-    public List<User> getAllUser(){
-        List<User> list=userMapper.getAllUser();
-        return list;
+    public User getUser(Integer userId) {
+        return userMapper.selectByUserId(userId);
+    }
+
+    public List<User> getAllUser() {
+        return userMapper.selectAllUser();
     }
 }

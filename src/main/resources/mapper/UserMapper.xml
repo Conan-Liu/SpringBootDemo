@@ -1,6 +1,49 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.conan.demo.mapper.UserMapper">
+    <resultMap id="BaseResultMap" type="com.conan.demo.model.User">
+        <id column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="user_name" property="userName" jdbcType="VARCHAR"/>
+        <result column="password" property="password" jdbcType="VARCHAR"/>
+        <result column="phone" property="phone" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="BaseColumnList">
+        user_id,user_name,password,phone
+    </sql>
+
+    <select id="selectByUserId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="BaseColumnList"/>
+        from t_user
+        where user_id = #{userId}
+    </select>
+
+    <select id="selectAllUser" resultMap="BaseResultMap">
+        select * from t_user
+    </select>
+
+    <delete id="deleteByUserId" parameterType="java.lang.Integer">
+        delete from t_user
+        where user_id = #{userId}
+    </delete>
+
+    <insert id="insert" parameterType="com.conan.demo.model.User">
+        insert into t_user(user_name,password,phone)
+        values(#{userName}, #{password}, #{phone})
+    </insert>
+
+    <!--<insert id="insertSelective" parameterType="com.conan.demo.model.User">-->
+        <!---->
+    <!--</insert>-->
+
+    <update id="updateByUserId" parameterType="com.conan.demo.model.User">
+        update t_user
+        set user_name = #{userName}, password = #{password}, phone = #{phone}
+        where user_id = #{userId}
+    </update>
+
+
 
     <insert id="add" useGeneratedKeys="true" keyProperty="id">
         insert into aaa(id, name, flag) values (#{id}, #{name}, #{flag})
@@ -16,8 +59,5 @@
         </where>
     </select>
 
-    <select id="getAllUser" resultType="com.conan.demo.model.User">
-        select * from aaa
-    </select>
 
 </mapper>

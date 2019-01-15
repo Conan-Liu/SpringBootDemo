@@ -8,9 +8,17 @@ import java.util.List;
  * Created by Administrator on 2019/1/2.
  */
 public interface UserMapper {
-    int add(User user);
+    int deleteByUserId(Integer userId);
 
-    User findOne(Integer id);
+    int insert(User record);
 
-    List<User> getAllUser();
+//    int insertSelective(User record);
+
+    User selectByUserId(Integer userId);
+
+//    int updateByUserIdSelective(User record);
+
+    int updateByUserId(User record);
+
+    List<User> selectAllUser();
 }

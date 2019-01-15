@@ -3,9 +3,10 @@ spring:
     active: dev
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://10.0.19.6:30242/test?useUnicode=true&characterEncoding=utf-8
-    username: pd_test_dev
-    password: VFR5rgdf
+    url: jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=utf-8
+    username: root
+    password: 123
+    #type: com.alibaba.druid.pool.DruidDataSource
 
 server:
   port: 7777
@@ -16,3 +17,10 @@ spring.mvc.servlet.load-on-startup: 1
 mybatis:
     type-aliases-package: com.conan.demo.model
     mapper-locations: classpath:mapper/*.xml
+
+# 打印mybatis的sql语句
+logging:
+  level:
+    com.conan.demo.mapper: debug
+
+
