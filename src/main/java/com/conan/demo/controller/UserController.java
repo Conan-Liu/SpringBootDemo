@@ -55,6 +55,21 @@ public class UserController {
         System.out.println("myheader = " + myheader);
     }
 
+    @PostMapping("/insertUser")
+    public int insertUser(@RequestBody User user) {
+        return userService.insertUser(user);
+    }
+
+    @GetMapping("/deleteUser")
+    public int deleteUser(@RequestParam("userId") Integer userId) {
+        return userService.deleteUser(userId);
+    }
+
+    @PostMapping("/updateUser")
+    public int updateUser(@RequestBody User user) {
+        return userService.updateUser(user);
+    }
+
     @PostMapping("/showInfo")
     public void showInfo(@RequestBody User user) {
         System.out.println(user);

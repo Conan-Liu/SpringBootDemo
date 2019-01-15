@@ -24,6 +24,18 @@ public class UserService {
         return userMapper.selectByUserId(userId);
     }
 
+    public int insertUser(User user) {
+        return userMapper.insert(user);
+    }
+
+    public int deleteUser(Integer id) {
+        return userMapper.deleteByUserId(id);
+    }
+
+    public int updateUser(User user){
+        return userMapper.updateByUserId(user);
+    }
+
     public List<User> getAllUser() {
         return userMapper.selectAllUser();
     }

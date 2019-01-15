@@ -34,15 +34,24 @@
     </insert>
 
     <!--<insert id="insertSelective" parameterType="com.conan.demo.model.User">-->
-        <!---->
+    <!---->
     <!--</insert>-->
 
     <update id="updateByUserId" parameterType="com.conan.demo.model.User">
         update t_user
-        set user_name = #{userName}, password = #{password}, phone = #{phone}
+        <set>
+            <if test="userName!=null">
+                user_name = #{userName}
+            </if>
+            <if test="password!=null">
+                password = #{password}
+            </if>
+            <if test="phone!=null">
+                phone = #{phone}
+            </if>
+        </set>
         where user_id = #{userId}
     </update>
-
 
 
     <insert id="add" useGeneratedKeys="true" keyProperty="id">
