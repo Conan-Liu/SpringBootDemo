@@ -2,6 +2,9 @@ package com.conan.demo.controller;
 
 import com.conan.demo.model.User;
 import com.conan.demo.service.UserService;
+import com.conan.demo.service.UserServiceTemplate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,6 +19,8 @@ import java.util.List;
 @RequestMapping("/user")
 public class UserController {
 
+    private static final Logger LOG = LoggerFactory.getLogger(UserController.class);
+
 //    @PathVaribale 获取url中的数据   /getUserInfo2/{userId}
 //    @RequestParam 获取请求参数的值  url 中 ？ 后面的参数
 //    @GetMapping 组合注解，是 @RequestMapping(method = RequestMethod.GET) 的缩写
@@ -23,6 +28,8 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private UserServiceTemplate userServiceTemplate;
 
     @RequestMapping("/userInfo")
     public String userInfo() {
@@ -80,8 +87,14 @@ public class UserController {
         return userService.getUser(id);
     }
 
-    @RequestMapping("/userAll")
-    public List<User> getAllUser() {
+    @RequestMapping("/userAll1")
+    public List<User> getAllUser1() {
         return userService.getAllUser();
+    }
+
+    @RequestMapping("/userAll2")
+    public List<User> getAllUser2() {
+        LOG.info("============================================================================");
+        return userServiceTemplate.getAllUsers();
     }
 }
