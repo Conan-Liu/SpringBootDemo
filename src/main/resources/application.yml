@@ -8,8 +8,11 @@ spring:
     password: 123
     #type: com.alibaba.druid.pool.DruidDataSource
 
+# http://192.168.1.2:7777/springboot/ 配置如下
 server:
   port: 7777
+  servlet:
+    context-path: /springboot
 
 #初始化加载DispatcherServlet
 spring.mvc.servlet.load-on-startup: 1
