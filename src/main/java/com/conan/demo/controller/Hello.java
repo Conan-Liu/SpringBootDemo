@@ -17,12 +17,23 @@ public class Hello {
     }
 
     @RequestMapping(value = "/first", method = RequestMethod.GET)
-    public ModelAndView firstEChartsDemo(){
+    public ModelAndView firstEChartsDemo() {
         return new ModelAndView("test");
     }
 
     @RequestMapping(value = "/course_clickcount", method = RequestMethod.GET)
-    public ModelAndView courseClickCountStat(){
+    public ModelAndView courseClickCountStat() {
         return new ModelAndView("demo");
+    }
+
+    /**
+     * 测试全局异常捕获机制
+     * @param i
+     * @return
+     */
+    @RequestMapping(value="/testException",method = RequestMethod.GET)
+    public String testException(int i) {
+        // 此处不要try - catch, 不然异常不能抛出， 不能被全局异常机制给捕获
+        return "success + " + 1 / i;
     }
 }
