@@ -13,7 +13,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by Conan on 2019/5/3.
  * HBase 操作工具类
  *
  * TODO... 待改善的的是， 改成连接池， 会快点
@@ -59,9 +58,6 @@ public class HbaseUtils {
 
     /**
      * 获取hbase的表名
-     *
-     * @param tableName
-     * @return
      */
     public HTable getTable(String tableName) {
         HTable table = null;
@@ -75,12 +71,6 @@ public class HbaseUtils {
 
     /**
      * 添加记录到Hbase
-     *
-     * @param tableName
-     * @param rowKey
-     * @param familyName
-     * @param columnName
-     * @param value
      */
     public void put(String tableName, String rowKey, String familyName, String columnName, String value) {
         HTable table = getTable(tableName);

@@ -11,9 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
-/**
- * Created by Administrator on 2019/1/2.
- */
 // @RestController注解，相当于@Controller+@ResponseBody两个注解的结合, 就不能返回jsp,html页面，视图解析器无法解析jsp,html页面
 @RestController
 @RequestMapping("/user")

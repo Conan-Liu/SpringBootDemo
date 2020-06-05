@@ -4,9 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
-/**
- * Created by Conan on 2019/6/24.
- */
 // 这个可以全局注解这个类的getter和setter方法
 @Getter
 @Setter

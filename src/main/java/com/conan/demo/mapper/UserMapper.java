@@ -4,9 +4,6 @@ import com.conan.demo.model.User;
 
 import java.util.List;
 
-/**
- * Created by Administrator on 2019/1/2.
- */
 public interface UserMapper {
     int deleteByUserId(Integer userId);
 

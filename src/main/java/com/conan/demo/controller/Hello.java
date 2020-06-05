@@ -5,9 +5,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-/**
- * Created by Conan on 2019/5/4.
- */
 @RestController
 public class Hello {
 
