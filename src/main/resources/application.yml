@@ -2,11 +2,27 @@ spring:
   profiles:
     active: dev
   datasource:
-    driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=utf-8
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/hive?serverTimezone=UTC&characterEncoding=utf8&useUnicode=true&useSSL=false&allowPublicKeyRetrieval=true
     username: root
-    password: 123
+    password: 12345678
+    # mysql 5.x.x
+    # driver-class-name: com.mysql.jdbc.Driver
+    # url: jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=utf-8
+    # username: root
+    # password: 123
     #type: com.alibaba.druid.pool.DruidDataSource
+
+
+  mvc:
+    view:
+      prefix: /WEB-INF/jsp/
+      suffix: .jsp
+
+    #初始化加载DispatcherServlet
+    servlet:
+      load-on-startup: 1
+
 
 # http://192.168.1.2:7777/springboot/ 配置如下
 server:
@@ -14,8 +30,6 @@ server:
   servlet:
     context-path: /springboot
 
-#初始化加载DispatcherServlet
-spring.mvc.servlet.load-on-startup: 1
 
 mybatis:
     type-aliases-package: com.conan.demo.model
@@ -25,5 +39,4 @@ mybatis:
 logging:
   level:
     com.conan.demo.mapper: debug
-
 
