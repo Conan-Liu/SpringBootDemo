@@ -24,4 +24,13 @@ public class UserController {
         System.out.println("____________________");
         return user;
     }
+
+    /**
+     * 测试多个切面
+     */
+    @RequestMapping("/manyAspects")
+    public String manyAspects(){
+        userService.manyAspects();
+        return "manyAspects";
+    }
 }

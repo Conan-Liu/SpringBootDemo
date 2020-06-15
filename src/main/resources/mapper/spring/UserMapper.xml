@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+
+<!-- mapper 文件对应一个提供服务的接口，一般是service -->
+<mapper namespace="com.conan.spring.dao.UserMapper">
+    <!-- select表示这是一个查询语句， id对应服务接口的方法名，parameterType对应输入参数类型，resultType对应返回类型，这里是使用的pojo别名，可以使用全名称 com.conan.spring.pojo.mybatis.User -->
+    <select id="getUser" parameterType="integer" resultType="user">
+        select id,user_name as userName,sex,note from t_user where id = #{id}
+    </select>
+</mapper>

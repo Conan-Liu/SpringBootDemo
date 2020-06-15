@@ -59,7 +59,7 @@
         </dependency>
 
         <!-- 这个刚开始运行，会报错，因为加载不到数据源 DataSource -->
-        <!-- SpringBoot和MyBatis整合，进行DAO层代码开发 -->
+        <!-- SpringBoot和MyBatis整合，进行DAO层代码开发，是由MyBatis社区开发，非Spring -->
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
             <artifactId>mybatis-spring-boot-starter</artifactId>
@@ -96,12 +96,6 @@
             </exclusions>
         </dependency>
 
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.19</version>
-        </dependency>
-
         <!-- 加载测试依赖包 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -109,9 +103,25 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- 配置JPA MySQL数据库 和 DBCP数据源 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jdbc</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.19</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-dbcp2</artifactId>
         </dependency>
 
         <dependency>
@@ -152,7 +162,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>com.conan.demo.DemoApplication</mainClass>
+                    <mainClass>com.conan.demo.ApplicationDemo</mainClass>
                 </configuration>
                 <executions>
                     <execution>

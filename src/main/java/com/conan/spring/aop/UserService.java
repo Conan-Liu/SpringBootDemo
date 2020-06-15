@@ -8,4 +8,6 @@ import com.conan.spring.ioc.User;
 public interface UserService {
 
     void printUser(User user);
+
+    void manyAspects();
 }

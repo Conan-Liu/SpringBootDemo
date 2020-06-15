@@ -47,7 +47,7 @@ public class JdbcExp {
         return this.userName;
     }
 
-    @Value("${username}")
+    @Value("${database.username}")
     public void setUserName(String userName) {
         System.out.println(userName);
         this.userName = userName;
@@ -57,7 +57,7 @@ public class JdbcExp {
         return this.password;
     }
 
-    @Value("${password}")
+    @Value("${database.password}")
     public void setPassword(String password) {
         System.out.println(password);
         this.password = password;
