@@ -14,7 +14,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
  * 该类仅仅是作为om.conan.spring包中Spring学习的入口类，不是项目的的入口类
- * 4. mybatis和spring日志分离
  */
 @SpringBootApplication(scanBasePackages = "com.conan.spring")
 // 默认指定的属性文件是 application.properties，可以通过该注解添加其它属性文件，注意是添加，application.properties始终默认加载

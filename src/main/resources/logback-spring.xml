@@ -29,11 +29,6 @@ debug：打印logback内部日志信息，监测logback运行状态，默认fals
     <!-- 引入SpringBoot默认的配置文件 -->
     <!-- <include resource="org/springframework/boot/logging/logback/base.xml"/> -->
 
-    <!-- 这里针对单独包配置日志级别，和application.yml里logging.level开头的配置等效，application.yml的优先级更高 -->
-    <logger name="org.springframework.web" level="INFO"/>
-    <logger name="com.conan.spring.dao" level="DEBUG"/>
-    <logger name="org.springframework.web" level="TRACE"/>
-
     <!-- appender用来格式化输出节点，就是logAppender -->
     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
         <!-- 该appender的全局日志过滤器，会屏蔽掉logger标签设置的级别，一般别用 -->
@@ -60,6 +55,28 @@ debug：打印logback内部日志信息，监测logback运行状态，默认fals
         </encoder>
     </appender>
 
+    <appender name="mybatis" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>/Users/mw/project/logs/springbootdemo/mybatis/sql.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>sql_%d{yyyy-MM-dd}_%i.log.gz</fileNamePattern>
+            <maxFileSize>10MB</maxFileSize>
+            <maxHistory>2</maxHistory>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>${PLAIN_PATTERN}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <!--
+    这里针对单独包配置日志级别，和application.yml里logging.level开头的配置等效，application.yml的优先级更高
+    注意，这里的ref对应的名称，名称定义在上，引用在下，因为xml是从上到下解析，如果这ref引用放在上面，可能找不到这个名称
+    这里是用来专门记录sql语句的appender
+    -->
+    <logger name="com.conan.spring.dao" level="DEBUG">
+        <appender-ref ref="mybatis"/>
+    </logger>
+    <logger name="org.springframework.web" level="TRACE"/>
 
     <!-- 全局日志级别 -->
     <root level="INFO">
