@@ -4,9 +4,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 /**
- * 默认指定的属性文件是 application.properties，可以通过该注解添加其它属性文件，注意是添加，application.properties始终默认加载
+ * 默认指定的属性文件是application.properties，可以通过该注解添加其它属性文件，注意是添加，application.properties始终默认加载
  *
- * @PropertySource(value = "classpath:jdbc.properties", ignoreResourceNotFound = true)
+ * 可以通过@PropertySource(value = "classpath:jdbc.properties", ignoreResourceNotFound = true)注解来添加属性文件
  */
 @Component
 public class JdbcExp {

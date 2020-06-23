@@ -4,7 +4,13 @@ import com.conan.spring.ioc.User;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.annotation.Order;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * 开发切面
@@ -21,6 +27,9 @@ import org.springframework.core.annotation.Order;
 @Aspect
 public class MyAspect {
 
+    // 使用AOP实现一个简单的日志切面
+    private static final Logger LOG= LoggerFactory.getLogger(MyAspect.class);
+
     /**
      * 如下@Before,@After,@AfterReturning,@AfterThrowing四个注解对应同一个正则表达式，略显冗余，从而有了切点（Pointcut）概念
      * 切点的主要作用是向Spring描述哪些类的哪些方法需要启用AOP编程
@@ -36,6 +45,13 @@ public class MyAspect {
     @Before("pointCut() && args(user)")
     public void before(JoinPoint point, User user) {
         System.out.println("before ...... = " + user);
+
+        ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        HttpServletRequest request = requestAttributes.getRequest();
+
+        LOG.info("请求地址:{}",request.getRequestURL().toString());
+        LOG.info("ip:{}",request.getRemoteAddr());
+
     }
 
     // @After("execution(* com.conan.spring.aop.UserServiceImpl.printUser(..))")
@@ -64,6 +80,10 @@ public class MyAspect {
         System.out.println("around after ......");
     }
 }
+
+
+
+
 
 
 /**

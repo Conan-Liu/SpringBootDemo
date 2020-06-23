@@ -15,6 +15,7 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties("day")
 public class ApplicationExp {
 
+    // 使用@Value注解，应用在只读不可修改的场景，如读取配置文件变量，注入到对象成员变量，驱动类用户名密码变量都可以如此
     @Value("${day.one}")
     private String one;
 

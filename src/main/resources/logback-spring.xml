@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+日志级别从低到高分为TRACE < DEBUG < INFO < WARN < ERROR < FATAL，如果设置为WARN，则低于WARN的信息都不会输出
+需要依赖 spring-boot-starter-logging，这个可以不用显示pom中加入，spring-boot-starter-web已经包含了该依赖
+SpringBoot 默认日志框架logback，可以在logback.xml配置，也可以在application.yml配置
+-->
+<!-- 0-n个<appender>标签    0-n个<logger>标签   必选一个<root>标签 -->
+<!--
+scan：如果配置文件发生改变，将会重新加载，默认true
+scanPeriod：监测的时间间隔，默认1分钟
+debug：打印logback内部日志信息，监测logback运行状态，默认false
+-->
+<configuration scan="true" scanPeriod="60 seconds" debug="false">
+    <!-- 定义变量 -->
+    <property name="APP_NAME" value="springbootdemo"/>
+    <property name="LOG_HOME" value="/Users/mw/project/logs/springbootdemo/logback"/>
+    <contextName>${APP_NAME}</contextName>
+
+    <!-- 彩色日志 -->
+    <conversionRule conversionWord="clr" converterClass="org.springframework.boot.logging.logback.ColorConverter"/>
+    <conversionRule conversionWord="wex"
+                    converterClass="org.springframework.boot.logging.logback.WhitespaceThrowableProxyConverter"/>
+    <conversionRule conversionWord="wEx"
+                    converterClass="org.springframework.boot.logging.logback.ExtendedWhitespaceThrowableProxyConverter"/>
+    <!--<property name="COLOR_PATTERN" value=""/>-->
+    <property name="PLAIN_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger -- %msg%n"/>
+
+    <!-- 引入SpringBoot默认的配置文件 -->
+    <!-- <include resource="org/springframework/boot/logging/logback/base.xml"/> -->
+
+    <!-- 这里针对单独包配置日志级别，和application.yml里logging.level开头的配置等效，application.yml的优先级更高 -->
+    <logger name="org.springframework.web" level="INFO"/>
+    <logger name="com.conan.spring.dao" level="DEBUG"/>
+    <logger name="org.springframework.web" level="TRACE"/>
+
+    <!-- appender用来格式化输出节点，就是logAppender -->
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <!-- 该appender的全局日志过滤器，会屏蔽掉logger标签设置的级别，一般别用 -->
+        <!--<filter class="ch.qos.logback.classic.filter.ThresholdFilter">-->
+            <!--<level>INFO</level>-->
+        <!--</filter>-->
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <!-- %logger{50} 日志产生的类，限定长度，可能部分类不能打印全路径 -->
+            <pattern>${PLAIN_PATTERN}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <appender name="dailyRollingFileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_HOME}/${APP_NAME}.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${APP_NAME}_%d{yyyy-MM-dd}_%i.log.gz</fileNamePattern>
+            <maxFileSize>10MB</maxFileSize>
+            <maxHistory>2</maxHistory>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>${PLAIN_PATTERN}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+
+    <!-- 全局日志级别 -->
+    <root level="INFO">
+        <appender-ref ref="console"/>
+        <!-- 上面定义的 -->
+        <appender-ref ref="dailyRollingFileAppender"/>
+    </root>
+</configuration>

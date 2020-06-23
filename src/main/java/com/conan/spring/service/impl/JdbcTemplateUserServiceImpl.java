@@ -92,5 +92,10 @@ public class JdbcTemplateUserServiceImpl implements JdbcTemplateUserService {
         return jdbcTemplate.update(sql, id);
     }
 
+    @Override
+    public int getUserQuery(Integer id) {
+        return 0;
+    }
+
 
 }

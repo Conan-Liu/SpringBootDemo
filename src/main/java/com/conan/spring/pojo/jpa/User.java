@@ -2,6 +2,7 @@ package com.conan.spring.pojo.jpa;
 
 import com.conan.spring.pojo.SexEnum;
 import lombok.Data;
+import org.apache.ibatis.type.Alias;
 
 import javax.persistence.*;
 
@@ -13,6 +14,7 @@ import javax.persistence.*;
 // 定义映射的数据库表
 @Table(name = "t_user")
 @Data
+@Alias("jpa_user")
 public class User {
 
     // 标明主键

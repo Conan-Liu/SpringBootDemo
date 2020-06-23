@@ -1,10 +1,7 @@
 package com.conan.demo.controller;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.HashMap;
@@ -12,18 +9,6 @@ import java.util.Map;
 
 @Controller
 public class Hello {
-
-    @GetMapping(value = "hello")
-    @ResponseBody
-    public String sayHello() {
-        return "Get Mapping Hello...";
-    }
-
-    @RequestMapping(value = "/hello1", method = RequestMethod.GET)
-    @ResponseBody
-    public String sayHello1() {
-        return "Hello World...";
-    }
 
     @RequestMapping(value = "/first", method = RequestMethod.GET)
     @ResponseBody

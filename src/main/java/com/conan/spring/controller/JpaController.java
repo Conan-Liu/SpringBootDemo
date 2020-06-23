@@ -11,19 +11,20 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.List;
 
 @Controller
+@RequestMapping(value = "/jpa")
 public class JpaController {
 
     @Autowired
     private UserJpaRepository userJpaRepository;
 
-    @RequestMapping(value = "/jpa_getuser", method = RequestMethod.GET)
+    @RequestMapping(value = "/getuser", method = RequestMethod.GET)
     @ResponseBody
     public User getUser(Integer id) {
         User user = userJpaRepository.findById(id).get();
         return user;
     }
 
-    @RequestMapping(value = "/jpa_getalluser")
+    @RequestMapping(value = "/getalluser")
     @ResponseBody
     public List<User> getAllUsers() {
         List<User> list = userJpaRepository.findUsers("name");

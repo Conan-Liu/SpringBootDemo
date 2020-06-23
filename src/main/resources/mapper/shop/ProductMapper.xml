@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.conan.shop.dao.ProductMapper">
+    <!-- 获取产品 -->
+    <select id="getProduct" resultType="com.conan.shop.pojo.Product">
+        select id,product_name as productName,stock,price,version,note from t_product
+        where id = #{id}
+        <!-- for update 加悲观锁，实现高并发数据异常问题，但不高效 -->
+        -- for update
+    </select>
+
+    <!-- 减库存，使用乐观锁CAS机制实现高吞吐量的数据准确性，需要增加字段version，
+    但是高并发情况下，失败可能比较多，一个人占用一条记录，10个人可能失败，导致1000个人可能抢不完100个商品，这与真实抢购可能有些出入 -->
+    <update id="decreaseProduct">
+        update t_product set
+        stock = stock - #{quantity},
+        version = version + 1
+        where id = #{id} and version = #{version}
+    </update>
+</mapper>

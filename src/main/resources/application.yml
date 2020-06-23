@@ -1,6 +1,11 @@
 spring:
+  # 指定处于激活状态的环境，dev表示开发环境，prod表示生产环境，这个字符串不是固定格式，只是比较常用的写法
+  # SpringBoot会自动加载application-${active}.properties，该配置参数可以在java命令运行时指定该参数覆盖
+  # java -jar springbootdemo-0.0.1-SNAPSHOT.jar --spring.profiles.active=prod
+  # 这里如果没找到prod的配置文件，并不会报错
   profiles:
     active: dev
+    # active: @prop.env@
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/springboot?serverTimezone=UTC&characterEncoding=utf8&useUnicode=true&useSSL=false&allowPublicKeyRetrieval=true
@@ -39,9 +44,26 @@ mybatis:
     type-aliases-package: com.conan.demo.model
     mapper-locations: classpath:mapper/*.xml
 
-# 打印mybatis的sql语句
-logging:
-  level:
-    com.conan.demo.mapper: debug
-    org.mybatis: DEBUG
 
+# appliction.yml 只能提供一些简单配置，如果需要更多功能，使用logback.xml文件配置
+#logging:
+#  # 指定日志的路径或者文件，file和path只能写一个
+#  path: /Users/mw/project/logs/springbootdemo/yml
+#  # file: /Users/mw/project/logs/springbootdemo/yml/spring.log
+#  file:
+#    # 单个日志文件最大10MB，满足条件就滚动，老日志文件会压缩
+#    max-size: 10MB
+#  level:
+#    root: WARN
+#    com.conan.demo.mapper: DEBUG
+#    org.mybatis: INFO
+#    org.springframework: DEBUG
+#    # 配置dao层日志信息为DEBUG，打印mybatis的sql语句，dao层就是mapper接口层
+#    com.conan.spring.dao: DEBUG
+#    com.conan.shop.dao: DEBUG
+#    # springboot从2.1后就不再打印映射接口Mapped日志信息，需要自己开启
+#    org.springframework.web: TRACE
+#  pattern:
+#    # 这里需要引号括起来，否则 %d 的这个 % 不识别，文件和控制台的分开单独设置
+#    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger -- %msg%n"
+#    file: "%d{yyyy-MM-dd HH:mm:ss:SSS} [%thread] %-5level %logger -- %msg%n"

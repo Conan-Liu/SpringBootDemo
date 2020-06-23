@@ -8,13 +8,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+/**
+ * 使用{@link org.springframework.jdbc.core.JdbcTemplate}作为模型层来处理业务逻辑
+ */
 @Controller
-public class JdbcController {
+@RequestMapping(value = "/jdbc")
+public class JdbcTemplateController {
 
     @Autowired
     private JdbcTemplateUserService jdbcTemplateUserService;
 
-    @RequestMapping(value = "/jdbc_getuser", method = RequestMethod.GET)
+    @RequestMapping(value = "/getuser", method = RequestMethod.GET)
     @ResponseBody
     public User getUser(int id) {
         User user=jdbcTemplateUserService.getUser(id);

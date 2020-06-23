@@ -7,5 +7,22 @@
 </head>
 <body>
 <h1>测试视图解析器</h1>
+
+<table>
+    <tr>
+        <td>编号</td>
+        <td>${user.id}</td>
+    </tr>
+
+    <tr>
+        <td>用户名</td>
+        <td>${user.userName}</td>
+    </tr>
+
+    <tr>
+        <td>备注</td>
+        <td>${user.note}</td>
+    </tr>
+</table>
 </body>
 </html>

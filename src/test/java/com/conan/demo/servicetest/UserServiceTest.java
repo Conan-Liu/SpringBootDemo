@@ -1,10 +1,7 @@
 package com.conan.demo.servicetest;
 
-import com.conan.demo.BaseTest;
+import com.conan.demo.DemoBaseTest;
 
-/**
- * Created by Conan on 2019/1/2.
- */
-public class UserServiceTest extends BaseTest{
+public class UserServiceTest extends DemoBaseTest {
 
 }

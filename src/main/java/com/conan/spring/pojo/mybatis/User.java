@@ -7,7 +7,7 @@ import org.apache.ibatis.type.Alias;
 
 @Data
 // Mybatis 的别名注解，指定别名为user，mapper文件中可以作为resultType来指定返回类型
-@Alias(value = "user")
+@Alias(value = "mybatis_user")
 public class User {
 
     private Integer id;

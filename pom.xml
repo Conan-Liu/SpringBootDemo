@@ -40,7 +40,7 @@
 
     <dependencies>
 
-        <!-- Spring Boot Starter依赖注入 AOP-->
+        <!-- SpringBoot Starter依赖注入 AOP-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-aop</artifactId>
@@ -68,8 +68,8 @@
 
         <!-- 图形化展示需要这个，这个依赖会让项目默认返回template下的页面，如果是webapp的目录下保存jsp页面，想通过视图访问，需要注释掉 -->
         <!--<dependency>-->
-            <!--<groupId>org.springframework.boot</groupId>-->
-            <!--<artifactId>spring-boot-starter-thymeleaf</artifactId>-->
+        <!--<groupId>org.springframework.boot</groupId>-->
+        <!--<artifactId>spring-boot-starter-thymeleaf</artifactId>-->
         <!--</dependency>-->
 
         <!-- 给前端传 json 需要这个 -->
@@ -96,7 +96,7 @@
             </exclusions>
         </dependency>
 
-        <!-- 加载测试依赖包 -->
+        <!-- 加载测试依赖包，引入SringBoot单元测试 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -104,10 +104,12 @@
         </dependency>
 
         <!-- 配置JPA MySQL数据库 和 DBCP数据源 -->
+        <!-- 仅仅是为了演示，正常开发不使用JPA，还是选择Mybatis -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jdbc</artifactId>
@@ -122,6 +124,23 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-dbcp2</artifactId>
+        </dependency>
+
+        <!-- SpringBoot通过spring-data-redis项目来和Redis整合，使用jedis开发，排除自带的Redis客户端驱动 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>io.lettuce</groupId>
+                    <artifactId>lettuce-core</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
         </dependency>
 
         <dependency>
@@ -154,7 +173,6 @@
         </dependency>
 
     </dependencies>
-/
     <build>
         <plugins>
             <!-- SpringBoot的maven插件 -->
@@ -162,7 +180,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>com.conan.demo.ApplicationDemo</mainClass>
+                    <mainClass>com.conan.spring.ApplicationLearning</mainClass>
                 </configuration>
                 <executions>
                     <execution>
@@ -181,6 +199,63 @@
                 </configuration>
             </plugin>
         </plugins>
+
+
+        <resources>
+            <!-- 先排除全部的配置文件，注意跟路径是项目所在的文件夹，这里是/.../SpringBootDemo -->
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+                <excludes>
+                    <exclude>application-*.properties</exclude>
+                </excludes>
+            </resource>
+            <!-- 再加载指定环境的配置文件 -->
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>false</filtering>
+                <includes>
+                    <include>application-${prop.env}.properties</include>
+                </includes>
+            </resource>
+        </resources>
     </build>
+
+    <!-- 两种打包方式
+    mvn clean package -Dprop.env=prod -DskipTests=true
+    mvn clean package -Pprod -DskipTests=true
+    -->
+    <profiles>
+        <!-- 本地开发环境 -->
+        <profile>
+            <id>dev</id>
+            <properties>
+                <prop.env>dev</prop.env>
+                <modifier>-dev</modifier>
+            </properties>
+            <activation>
+                <!-- 默认的，不加参数时执行这个profile -->
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+
+        <!-- 测试环境 -->
+        <profile>
+            <id>test</id>
+            <properties>
+                <prop.env>test</prop.env>
+                <modifier>-test</modifier>
+            </properties>
+        </profile>
+
+        <!-- 生产环境 -->
+        <profile>
+            <id>prod</id>
+            <properties>
+                <prop.env>prod</prop.env>
+                <modifier>-prod</modifier>
+            </properties>
+        </profile>
+    </profiles>
 
 </project>

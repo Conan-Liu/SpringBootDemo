@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.conan.spring.dao.UserRedisMapper">
+
+    <select id="getUser" parameterType="int" resultType="redis_user">
+        select * from t_user_redis where id = #{id}
+    </select>
+    
+    <insert id="insertUser" useGeneratedKeys="true" keyProperty="id" parameterType="redis_user">
+        insert into t_user_redis(user_name,note) values(#{userName},#{note})
+    </insert>
+    
+    <update id="updateUser">
+        update t_user_redis
+        <set>
+            <if test="userName != null">user_name = #{userName},</if>
+            <if test="note != null">note = #{note}</if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <select id="findUsers" resultType="redis_user">
+        select id,user_name as userName,note from t_user_redis
+        <where>
+            <if test="userName != null">and user_name = #{userName}</if>
+            <if test="note != null">and note = #{note}</if>
+        </where>
+    </select>
+
+    <delete id="deleteUser" parameterType="int">
+        delete from t_user_redis where id = #{id}
+    </delete>
+</mapper>

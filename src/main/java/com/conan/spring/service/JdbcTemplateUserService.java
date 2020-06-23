@@ -15,4 +15,6 @@ public interface JdbcTemplateUserService {
     int updateUser(User user);
 
     int deleteUser(Integer id);
+
+    int getUserQuery(Integer id);
 }

@@ -9,16 +9,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
+@RequestMapping(value = "mybatis")
 public class MyBatisController {
 
     @Autowired
     // IoC容器中存在两个名称相同的Bean，会报错，所以特别指定名称
-    @Qualifier(value = "MybatisUserServiceImpl")
+    @Qualifier(value = "mybatisUserServiceImpl")
     private UserService userService;
 
-    @RequestMapping(value = "/mybatis_getuser")
+    @RequestMapping(value = "/getuser")
     @ResponseBody
     public User getUser(int id) {
         return userService.getUser(id);
     }
+
+
 }

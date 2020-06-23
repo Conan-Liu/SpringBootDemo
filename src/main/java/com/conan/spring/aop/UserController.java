@@ -7,12 +7,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
+@RequestMapping(value = "aop")
 public class UserController {
 
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "/aop_print")
+    @RequestMapping(value = "/print")
     @ResponseBody
     public User printUser(Long id, String userName, String note) {
         User user = new User();
@@ -28,7 +29,7 @@ public class UserController {
     /**
      * 测试多个切面
      */
-    @RequestMapping("/manyAspects")
+    @RequestMapping("/manyaspects")
     public String manyAspects(){
         userService.manyAspects();
         return "manyAspects";
